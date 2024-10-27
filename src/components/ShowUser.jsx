@@ -1,44 +1,47 @@
-import { Button } from "bootstrap";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useState } from "react";
+import Button from "./Button"
+import { h1 } from "fontawesome";
 
 const ShowUser = ({ data }) => {
   console.log("Show User :" + data);
+
   
-  const [number , setNumber] = useState(0)
-  const [todo , setTodo] = useState(null)
+  const [number , setNumber] = useState(1)
+  // const [todo , setTodo] = useState(data[0])
+  
   const Increase =()=>{
-    setNumber + 1
+    setNumber(number + 1)
+    
   }
   const DecreaseNumber = ()=>{
-    number < 1 ? alert("the first user is this") : setNumber(number-1)
+    number < 2 ? setNumber(1) : setNumber(number-1)
   }
 
-  const currentUser =()=>{
-    data.find(user => user.id == number);
-    setTodo(user)
-    
-  }
-useEffect(()=>{
-  currentUser()
-} , [])
+
   return (
+    
     <>
     
-      <div className="container" key={todo.id}>
+      <div className="container" >
       <div className="row">
         <div className="col">
-          <h1>Title :{todo.title}</h1>
+          <h1>Title : {
+data.find(todo => todo.id == number).title
+}</h1>
         </div>
       </div>
       <div className="row">
         <div className="col">
-          <h1>Class User :{todo.userId}</h1>
+          <h1>Class User : {
+data.find(todo => todo.id == number).userId
+}</h1>
         </div>
       </div>
       <div className="row">
         <div className="col">
-          <h1>Condition :{todo.completed ? (
+          <h1>Condition : {
+data.find(todo => todo.id == number).completed
+? (
                   <div style={{ color: "green" }}> Done</div>
                 ) : (
                   <div style={{ color: "red" }}>Not completed</div>
@@ -47,16 +50,22 @@ useEffect(()=>{
       </div>
       <div className="row">
         <div className="col">
-          <h1> User {todo.id}</h1>
+          <h1> User {
+data.find(todo => todo.id == number).id
+}</h1>
         </div>
       </div>
     </div>
     
 
-    <Button  nameClicker = {<i class="fa-solid fa-arrow-left"></i>}  handelClicker={DecreaseNumbe}/>
-    <Button nameClicker ={<i className="fa-solid fa-arrow-right"></i>} handelClicker ={Increase} />
+<div className="row ">
+  <div className="col justify-content-center"><Button  nameClicker = {<h1 className='bg-primary'>Perv</h1>}  handleClick={DecreaseNumber} /></div>
+  <div className="col justify-content-center"><Button nameClicker ={<h1 className='bg-primary'>Next</h1>} handleClick ={Increase} /></div>
+</div>
     
-      
+    
+    
+
     </>
   );
 };
